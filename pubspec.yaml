@@ -8,9 +8,18 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
 flutter:
   uses-material-design: true
+  assets:
+   - Images/zzz.png
+  fonts:
+    - family: Estonia
+      fonts:
+        - asset: Fonts/Estonia-Regular.ttf
+
