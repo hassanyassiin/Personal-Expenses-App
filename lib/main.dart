@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import '../Widgets/transaction_list.dart';
 import './Widgets/adding_transaction.dart';
 import './Models/transaction.dart';
+import './Widgets/chart.dart';
 
-void main() => runApp( MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        //primarySwatch: Colors.red,
-        //accentColor: Colors.amber,
-        //fontFamily: 'Estonia',
-        //textTheme: ThemeData.light().textTheme.copyWith(subtitle2: const TextStyle(fontFamily: 'Estonia',fontSize: 20)),
-        // appBarTheme: AppBarTheme(
-        //   textTheme: ThemeData.light().textTheme.copyWith(subtitle2: const Text Style(fontFamily: 'Quick ',fontSize: 20) ),
-        // ),
-      ),
+          //primarySwatch: Colors.red,
+          //accentColor: Colors.amber,
+          //fontFamily: 'Estonia',
+          //textTheme: ThemeData.light().textTheme.copyWith(subtitle2: const TextStyle(fontFamily: 'Estonia',fontSize: 20)),
+          // appBarTheme: AppBarTheme(
+          //   textTheme: ThemeData.light().textTheme.copyWith(subtitle2: const Text Style(fontFamily: 'Quick ',fontSize: 20) ),
+          // ),
+          ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -55,6 +54,16 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  List<Transaction> get _recentTransaction {
+    return _transactionmap.where((element) {
+      return element.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,15 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Expenses App'),
       ),
       body: SingleChildScrollView(
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Card(
-              color: Colors.blueAccent,
-              elevation: 5,
-              child: SizedBox(width: double.infinity, child: Text('Chart!')),
-            ),
+            Chart(_recentTransaction),
             TransactionList(_transactionmap),
           ],
         ),

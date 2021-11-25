@@ -25,7 +25,6 @@ class _AddingTransactionState extends State<AddingTransaction> {
         enteredTitle,
         enteredAmount,
       );
-
     }
     Navigator.of(context).pop();
   }
